@@ -10,8 +10,8 @@
     rgb(252, 144, 234)
   );
   animation: rotate 20s infinite;
-  opacity: 70%;
-  filter: blur(110px)
+  opacity: 30%;
+  filter: blur(130px)
 }
 
 @keyframes rotate {
