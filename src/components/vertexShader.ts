@@ -1,4 +1,4 @@
-const vertexShader = `
+const vertexShader: string = `
 uniform float uTime;
 uniform float uRadius;
 

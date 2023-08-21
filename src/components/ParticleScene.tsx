@@ -5,12 +5,16 @@ import * as THREE from "three";
 import vertexShader from './vertexShader';
 import fragmentShader from './fragmentShader';
 
-const CustomGeometryParticles = (props) => {  
+type Prop ={
+  count: number,
+}
+
+const CustomGeometryParticles = (props: Prop) => {  
   const { count } = props;
   const radius = 2;
 
   // This reference gives us direct access to our points
-  const points = useRef();
+  const points = useRef(null);
 
   // Generate our positions attributes array
   const particlesPosition = useMemo(() => {
@@ -42,8 +46,9 @@ const CustomGeometryParticles = (props) => {
 
   useFrame((state) => {
     const { clock } = state;
-
+    //@ts-ignore
     points.current.material.uniforms.uTime.value = clock.elapsedTime;
+    
   });
 
   return (

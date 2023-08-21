@@ -1,4 +1,4 @@
-const fragmentShader = `
+const fragmentShader: string = `
 varying float vDistance;
 
 void main() {
@@ -13,4 +13,4 @@ void main() {
 }
 `
 
-export default fragmentShader
+export default fragmentShader;
