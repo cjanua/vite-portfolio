@@ -15,6 +15,7 @@
     "@react-three/drei": "^9.79.3",
     "@react-three/fiber": "^8.13.5",
     "@react-three/postprocessing": "^2.15.0",
+    "@vercel/analytics": "^1.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "gsap": "^3.12.2",
