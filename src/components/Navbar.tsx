@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"; // import state
 import Scene from "./ParticleScene";
-import useMousePosition from "./useMousePosition";
+
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
-  const { clientX, clientY } = useMousePosition();
+  
 
   useEffect(() => {
     console.log(isNavOpen);
@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
 
-    <div className = "bg-black  flex justify-end pt-8 m-0 pr-8" >
+    <div className = "justify-end pt-8 m-0 pr-8" >
       <div className="drawer drawer-end">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex justify-end z-20">
@@ -32,24 +32,20 @@ export default function Header() {
         </div> 
         <div className="drawer-side w-screen z-10 overflow-x-clip overflow-y-clip">
           <label htmlFor="my-drawer-4" className="drawer-overlay w-screen to-background "></label>
-          <ul className="menu absolute right-0 grid cols-6 w-full h-full bg-base-200 ">
+          
             {/* Sidebar content here */}
-
-            <div className = "absolute w-full h-full pl-96" style = {{
-              left: (clientX - window.innerWidth / 2)*0.04,
-              top: (clientY - window.innerHeight / 2)*0.02,
-            }}>
+          <ul className="menu absolute right-4 grid cols-6 w-screen h-full bg-base-200 ">
+            <div className = "absolute w-screen h-screen overflow-visible" >
               <Scene />
             </div>
+            <ul className = "absolute right-96 bottom-1/2 text-right flex flex-col gap-24">
+
+              <li className = " "><a className="bg-white bg-opacity-60">About</a></li>
+              <li className = " "><a className="bg-white bg-opacity-60">Portfolio</a></li>
+              <li className = " "><a className="bg-white bg-opacity-60">Contact</a></li>
             
-            <li className = "p-8 w-1/12 pl-16"><a></a></li>
-            <li className = "p-8 w-1/12 pl-16"><a></a></li>
-            <li className = "p-8 w-1/12 pl-64"><a>About</a></li>
-            <li className = "p-8 w-1/12 pl-64"><a>Portfolio</a></li>
-            <li className = "p-8 w-1/12 pl-64"><a>Contact</a></li>
-            <li className = "p-8 w-1/12 pl-16"><a></a></li>
-            <li className = "p-8 w-1/12 pl-16"><a></a></li>
-            <li className = "p-8 w-1/12 pl-16"><a></a></li>
+            </ul>
+            
           </ul>
         </div>
       </div>

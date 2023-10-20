@@ -13,7 +13,7 @@ function App() {
         
         <div className = "h-full">
           
-          <div className = "h-full w-full absolute right-0">
+          <div className = "h-screen w-screen absolute right-0">
             <Canvas shadows > 
               <Suspense  fallback = {null}> 
 

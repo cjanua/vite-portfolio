@@ -1,13 +1,15 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
-
+import useMousePosition from './useMousePosition';
 import vertexShader from './vertexShader';
 import fragmentShader from './fragmentShader';
 
 type Prop ={
   count: number,
 }
+
+
 
 const CustomGeometryParticles = (props: Prop) => {  
   const { count } = props;
@@ -21,7 +23,7 @@ const CustomGeometryParticles = (props: Prop) => {
     const positions = new Float32Array(count * 3);
     
     for (let i = 0; i < count; i++) {
-      const distance = Math.sqrt(Math.random()) * radius;
+      const distance = Math.sqrt(Math.random()) * radius*1.8;
       const theta = THREE.MathUtils.randFloatSpread(360); 
       const phi = THREE.MathUtils.randFloatSpread(360); 
       
@@ -44,10 +46,16 @@ const CustomGeometryParticles = (props: Prop) => {
     }
   }), [])
 
+  const clientX = useMousePosition().clientX
+  const clientY = useMousePosition().clientY
+
+
   useFrame((state) => {
     const { clock } = state;
-    //@ts-ignore
-    points.current.material.uniforms.uTime.value = clock.elapsedTime;
+    const mess = (clientX - window.innerWidth/2)/(window.innerWidth/2)
+    const str = (clientY - window.innerHeight/2)/(window.innerHeight/2)
+    points.current.material.uniforms.uRadius.value -= str/1000;
+    points.current.material.uniforms.uTime.value -= mess/10;
     
   });
 
@@ -74,11 +82,13 @@ const CustomGeometryParticles = (props: Prop) => {
 
 const Scene = () => {
   return (
-    <Canvas camera={{ position: [2.0, 2.0, 2.0] }}>
-      <ambientLight intensity={0.5} />
-      <CustomGeometryParticles count={4000} />
+    <Canvas camera={{ position: [1.3, 1.3, 1.3] }}>
+      <ambientLight intensity={0} />
+      <CustomGeometryParticles count={900000} />
     </Canvas>
   );
 };
 
 export default Scene;
+
+

@@ -5,7 +5,7 @@ import Blob from "./Blob";
 
 export const Overlay = () => {
   return (
-    <Scroll html>
+    <Scroll html >
       <Blob />
       <Navbar />
       <HomeText />
