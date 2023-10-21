@@ -52,11 +52,9 @@ const CustomGeometryParticles = (props: Prop) => {
   const [mess, setMess] = useState(0)
   const [si, setSi] = useState(0)
 
-  useFrame((state) => {
-    const { clock } = state;
+  useFrame(() => {
     setMess(-(clientX - window.innerWidth/2)/(window.innerWidth/2))
     setSi(-(clientY - window.innerHeight/2)/(window.innerHeight/2))
-    const deltaTime = clock.elapsedTime
     if ( !(points.current.material.uniforms.uRadius.value < 0.45 && si < 0) && !(points.current.material.uniforms.uRadius.value > 4 && si > 0)){
       points.current.material.uniforms.uRadius.value += 0.0018*si
     }
