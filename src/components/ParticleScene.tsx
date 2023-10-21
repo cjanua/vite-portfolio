@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import useMousePosition from './useMousePosition';
 import vertexShader from './vertexShader';
@@ -39,23 +39,29 @@ const CustomGeometryParticles = (props: Prop) => {
 
   const uniforms = useMemo(() => ({
     uTime: {
-      value: 0.0
+      value: 0.0+5
     },
     uRadius: {
-      value: radius
+      value: radius*1.1
     }
   }), [])
 
   const clientX = useMousePosition().clientX
   const clientY = useMousePosition().clientY
 
+  const [mess, setMess] = useState(0)
+  const [si, setSi] = useState(0)
 
   useFrame((state) => {
     const { clock } = state;
-    const mess = (clientX - window.innerWidth/2)/(window.innerWidth/2)
-    const str = (clientY - window.innerHeight/2)/(window.innerHeight/2)
-    points.current.material.uniforms.uRadius.value -= str/1000;
-    points.current.material.uniforms.uTime.value -= mess/10;
+    setMess(-(clientX - window.innerWidth/2)/(window.innerWidth/2))
+    setSi(-(clientY - window.innerHeight/2)/(window.innerHeight/2))
+    const deltaTime = clock.elapsedTime
+    if ( !(points.current.material.uniforms.uRadius.value < 0.45 && si < 0) && !(points.current.material.uniforms.uRadius.value > 4 && si > 0)){
+      points.current.material.uniforms.uRadius.value += 0.0018*si
+    }
+    
+    points.current.material.uniforms.uTime.value += 0.15*mess //Math.cos(deltaTime/5)
     
   });
 
@@ -82,9 +88,9 @@ const CustomGeometryParticles = (props: Prop) => {
 
 const Scene = () => {
   return (
-    <Canvas camera={{ position: [1.3, 1.3, 1.3] }}>
+    <Canvas camera={{ position: [1.5, 1.5, 1.5] }} style={{ background: "black" }}>
       <ambientLight intensity={0} />
-      <CustomGeometryParticles count={900000} />
+      <CustomGeometryParticles count={1200000} />
     </Canvas>
   );
 };
